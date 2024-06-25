@@ -7,7 +7,7 @@ using Bindings.Models;
 
 namespace Bindings.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase, INotifyPropertyChangedq
+public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
     public ObservableCollection<Product> Products { get; set; }
     public ObservableCollection<Product> SelectedProducts { get; set; }
