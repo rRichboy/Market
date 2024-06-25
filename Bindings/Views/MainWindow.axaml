@@ -1,0 +1,140 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Bindings.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="Bindings.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Bindings"
+        Width="800" Height="600"
+        WindowState="Maximized">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Window.Styles>
+
+        <Style Selector="ListBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Width" Value="180" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Margin" Value="0 10" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style Selector="Button.filtr">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Style Selector="^:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+            <Style Selector="^:focus /template/ ContentPresenter">
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+        </Style>
+
+        <Style Selector="StackPanel">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+    </Window.Styles>
+
+    <!-- Основа !-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock HorizontalAlignment="Right" Text="{Binding Login,StringFormat='Вы вошли как {0}'}" />
+        <Button Grid.Row="0" Click="LogOut" Margin="0 25 0 0" Width="90" Height="44" Content="Exit"
+                HorizontalAlignment="Right" />
+
+        <StackPanel Grid.Row="">
+            <TextBox HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="800" Name="Search"
+                     Margin="0 0 0 0" Watermark="Поиск товара" KeyUp="SearchTextBox_OnKeyUp" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 -5 0 0" Spacing="10">
+
+            <Button Classes="filtr" Content="По цене" Click="PriceButton_Click" />
+            <TextBlock Name="PriceArrow" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+            <ComboBox Name="ManufacturerComboBox" Width="215" SelectedIndex="0" VerticalAlignment="Center"
+                      KeyUp="SearchTextBox_OnKeyUp2">
+                <ComboBoxItem Content="Все производители" />
+                <ComboBoxItem Content="Производитель 1" />
+                <ComboBoxItem Content="Производитель 2" />
+                <ComboBoxItem Content="Производитель 3" />
+                <ComboBoxItem Content="Производитель 4" />
+                <ComboBoxItem Content="Производитель 5" />
+            </ComboBox>
+
+            <!--
+            <Button Classes="filtr" Content="По алфавиту" Click="AlfavitButton_Click"/>
+            <TextBlock Name="AlfavitArrow" Text="" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            !-->
+        </StackPanel>
+
+        <ListBox Grid.Row="2" Name="Prod" ItemsSource="{Binding Products}"
+                 SelectionMode="Multiple" SelectedItems="{Binding SelectedProducts}" Background="Transparent"
+                 DoubleTapped="Prod_OnDoubleTapped">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Width="300">
+                        <StackPanel>
+                            <Image Source="{Binding ImagePath}" Width="100" Height="100" />
+                            <TextBlock Text="{Binding Name, StringFormat='Название - {0}'}" />
+                            <TextBlock Text="{Binding Price, StringFormat='Цена - {0:C}'}" Foreground="Green" />
+                            <TextBlock Text="{Binding Manufacture, StringFormat='Производитель - {0}'}"
+                                       Foreground="Coral" />
+                            <TextBlock Text="{Binding Count, StringFormat='Количество на складе - {0}'}"
+                                       Foreground="Blue" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+
+            <Button Name="Create" IsVisible="False" Content="Создать товар" Click="Button_OnClick" />
+            <Button Name="Delete" IsVisible="False" Content="Удалить" Click="DeleteButton_OnClick" />
+            <Button Name="Add" IsVisible="False" Content="Добавить в корзину" Click="OpenButton_Click" />
+            <Button Name="OpenCart" IsVisible="False" Content="Открыть корзину" Click="OpenCartButton_Click" />
+
+
+            <!-- <Button Name="Edit" IsVisible="False" Content="Изменить" Click="EditButton_OnClick"/> -->
+
+
+        </StackPanel>
+        <TextBlock Grid.Row="1" Name="Error" Foreground="Red" />
+    </Grid>
+</Window>

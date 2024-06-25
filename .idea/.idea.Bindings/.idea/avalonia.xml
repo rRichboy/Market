@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Bindings/App.axaml" value="Bindings/Bindings.csproj" />
+        <entry key="Bindings/Views/AddProducts.axaml" value="Bindings/Bindings.csproj" />
+        <entry key="Bindings/Views/EditProducts.axaml" value="Bindings/Bindings.csproj" />
+        <entry key="Bindings/Views/Korzina.axaml" value="Bindings/Bindings.csproj" />
+        <entry key="Bindings/Views/Login.axaml" value="Bindings/Bindings.csproj" />
+        <entry key="Bindings/Views/MainWindow.axaml" value="Bindings/Bindings.csproj" />
+        <entry key="Bindings/Views/Window1.axaml" value="Bindings/Bindings.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

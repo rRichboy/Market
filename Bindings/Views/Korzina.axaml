@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="using:Bindings.ViewModels"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:DataType="vm:MainWindowViewModel"
+        mc:Ignorable="d"
+        x:Class="Bindings.Views.Korzina"
+        Title="Корзина"
+        Width="800" Height="600"
+        WindowState="Maximized">
+
+    <Window.Styles>
+        <Style Selector="Button.niz">
+            <Setter Property="Width" Value="180" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Margin" Value="0 10" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+    </Window.Styles>
+
+    <StackPanel HorizontalAlignment="Center">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="500">
+            <ListBox Name="Cart" ItemsSource="{Binding Cart}" SelectionMode="Multiple">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Padding="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding ImagePath}" Width="75" Height="75" Margin="0 0 10 0" />
+                                <StackPanel Width="250">
+                                    <TextBlock Text="{Binding Name, StringFormat='Название - {0}'}" FontSize="16" FontWeight="Bold" Margin="0 0 0 5" />
+                                    <TextBlock Text="{Binding Price, StringFormat='Цена - {0:C}'}" Foreground="Green" />
+                                    <TextBlock Text="{Binding Manufacture, StringFormat='Производитель - {0}'}" Foreground="Coral" />
+                                    <TextBlock Text="{Binding Count, StringFormat='Количество на складе - {0}'}" Foreground="Blue" />
+                                </StackPanel>
+                                
+                                <!-- <StackPanel Margin="10 10 0 0"> -->
+                                <!--     <Button Content="+" HorizontalContentAlignment="Center" Click="IncreaseCountButton_Click" Margin="0 0 5 0" Width="30" Height="30"/> -->
+                                <!--     <Button Content="-" HorizontalContentAlignment="Center" Click="DecreaseCountButton_Click" Width="30" Height="30"/> -->
+                                <!-- </StackPanel> -->
+                                
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+        <TextBlock HorizontalAlignment="Center" Name="Summa" Margin="5" />
+        
+
+        <StackPanel  Margin="5">
+            <Button Classes="niz" Content="Удалить" Click="DeleteButton_OnClick" Margin="0 0 20 0" Width="100" Height="30" />
+            <Button Classes="niz" Name="BackButton" Content="Вернуться к покупкам" Width="200" Height="30" />
+        </StackPanel>
+    </StackPanel>
+</Window>

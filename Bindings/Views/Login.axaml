@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="300" Height="300"
+        x:Class="Bindings.Views.Login"
+        Title="Вход"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Width" Value="180" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="Width" Value="180" />
+            <Setter Property="MaxLength" Value="20" />
+        </Style>
+
+        <Style Selector="TextBlock.infa">
+            <Setter Property="FontWeight" Value="Bold" />
+
+        </Style>
+    </Window.Styles>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
+        <TextBlock Classes="infa" Text="Чтобы войти как 'Админ' пароль '0000' " />
+        <TextBlock Classes="infa" Text="Логин любой!" HorizontalAlignment="Center" />
+
+        <TextBox x:Name="UsernameTextBox" Watermark="Логин" />
+        <TextBox x:Name="PasswordBox" Watermark="Пароль" PasswordChar="*" />
+
+        <Button Background="Blue" Content="Войти" Click="Login_Click" />
+        <Button Background="Gray" Content="Продолжить как гость" Click="ContinueAsGuest_Click" />
+
+        <TextBlock HorizontalAlignment="Center" Background="Red" x:Name="Oshibka" />
+
+    </StackPanel>
+</Window>
